@@ -46,6 +46,23 @@ function showLoading() {
   }, 1000);
 }
 
+// Filter posts
+function filterPosts(e) {
+  const targetValue = e.target.value.toUpperCase();
+  const posts = document.querySelectorAll('.post');
+  
+  posts.forEach(post => {
+    const title = post.querySelector('.post-title').textContent.toUpperCase();
+    const body = post.querySelector('.post-body').textContent.toUpperCase();
+
+    if (title.indexOf(targetValue) > -1 || body.indexOf(targetValue) > -1) {
+      post.style.display = 'flex';
+    } else {
+      post.style.display = 'none';
+    }
+  });
+}
+
 // Init posts
 showPosts();
 
@@ -61,3 +78,5 @@ window.addEventListener('scroll', () => {
     showLoading();
   }
 });
+
+filter.addEventListener('input', filterPosts);
